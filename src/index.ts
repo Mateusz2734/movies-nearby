@@ -1,13 +1,19 @@
 import express, { Request, Response } from 'express';
 import naStarowce from "./scrapers/naStarowce";
+import helios from "./scrapers/helios";
 
-const PORT = 3000;
+const PORT = 4000;
 
 const app = express();
 
-app.get('/', async (req: Request, res: Response) => {
-  const result = await naStarowce("http://kino.zory.pl/wydarzenia-2022-08-23.html");
-  res.json({ movies: result });
+app.get('/starowka', async (req: Request, res: Response) => {
+  const result = await naStarowce("2022-08-17");
+  res.json(result);
+});
+
+app.get('/helios', async (req: Request, res: Response) => {
+  const result = await helios("2022-08-17");
+  res.json(result);
 });
 
 app.listen(PORT, () => {
