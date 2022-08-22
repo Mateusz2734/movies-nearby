@@ -12,15 +12,15 @@ export default async function run(date: string) {
   } else {
     const result = await axios.get(`https://www.helios.pl/64,Zory/Repertuar/index/dzien/${urlDay}`);
     const $ = load(result.data);
-    // Parse the titles according to the page
+    // Parse the titles according to the page structure
     const titles = slice(split($(".movie-link").text(), "\n").map(info => trim(info)), 1);
-    // Parse the times according to the page
+    // Parse the times according to the page structure
     const infos = split($("div.time").text(), "\n").map(info => info.replace(/\t/g, '')).map(info => info.replace(/\*/g, '').match(/.{1,5}/g)).slice(-titles.length);
     if (infos.includes(null)) {
       // Return unified object with empty array to prevent weird behavior
       return { date: dayjs(date).format("YYYY-MM-DD"), cinema: "Kino Helios Żory", movies: [] };
     } else {
-      // Connect info and title array
+      // Combine info and title arrays
       const zipped = zip(titles, infos);
       // New array for proper output format
       const movies: Object[] = [];

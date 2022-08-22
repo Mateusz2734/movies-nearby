@@ -6,8 +6,9 @@ const PORT = 4000;
 
 const app = express();
 
+// These routes exist only for development purposes
 app.get('/starowka', async (req: Request, res: Response) => {
-  const result = await naStarowce("2022-09-20");
+  const result = await naStarowce("2022-12-20");
   res.json(result);
 });
 
