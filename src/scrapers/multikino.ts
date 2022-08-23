@@ -1,4 +1,4 @@
-import { split, trim, without, chunk, zip } from "lodash";
+import { zip } from "lodash";
 import { load } from "cheerio";
 import dayjs from 'dayjs';
 import puppeteer from "puppeteer";
@@ -37,7 +37,10 @@ export default async function run(date: string) {
     });
     times.push(oneMovieTimes);
   });
-  const movies = zip(titles, times);
-  return { date: unifiedDate, cinema: "Kino Helios Żory", movies: movies };
+  const zipped = zip(titles, times);
+  const movies: Object[] = [];
+  for (const entry of zipped) {
+    movies.push({ title: entry[0], time: entry[1] });
+  }
+  return { date: unifiedDate, cinema: "Multikino Katowice", movies: movies };
 }
-run("25-08-2022");
