@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import puppeteer from "puppeteer";
 
 export default async function run(date: string) {
-  const pageSpecificDate = dayjs(date).format("DD-MM-YYYY");
   const unifiedDate: string = dayjs(date).format("YYYY-MM-DD");
   const browser = await puppeteer.launch({
     headless: true,
@@ -14,10 +13,8 @@ export default async function run(date: string) {
     }
   });
   const page: puppeteer.Page = await browser.newPage();
-  await page.goto(`https://multikino.pl/repertuar/katowice/teraz-gramy/alfabetyczny?data=${pageSpecificDate}`);
-
+  await page.goto(`https://www.cinema-city.pl/kina/punkt44/1065#/buy-tickets-by-cinema?in-cinema=1065&at=${unifiedDate}&view-mode=list`);
   await page.waitForNetworkIdle();
-
   const html: string = await page.evaluate((): string => {
     return document.documentElement.innerHTML;
   });
@@ -25,14 +22,14 @@ export default async function run(date: string) {
 
   let $: cheerio.Root = load(html);
   const titles: string[] = [];
-  $('.filmlist').find('a.filmlist__title > span').each((_: number, element: cheerio.Element): void => {
+  $('.qb-list-by-list').find('a.qb-movie-link > h3.qb-movie-name').each((_: number, element: cheerio.Element): void => {
     titles.push(trim($(element).text()));
   });
 
   const times: string[][] = [];
-  $('.filmlist').find('.day__section').each((_: number, element: cheerio.Element): void => {
+  $('.qb-list-by-list').find('.events').each((_: number, element: cheerio.Element): void => {
     const oneMovieTimes: string[] = [];
-    $(element).find(".default").each((_: number, innerElement: cheerio.Element): void => {
+    $(element).find("div > a.btn").each((_: number, innerElement: cheerio.Element): void => {
       oneMovieTimes.push(trim($(innerElement).text()));
     });
     times.push(oneMovieTimes);
@@ -42,5 +39,5 @@ export default async function run(date: string) {
   for (const entry of zipped) {
     movies.push({ title: entry[0], time: entry[1] });
   }
-  return { date: unifiedDate, cinema: "Multikino Katowice", movies: movies };
+  return { date: unifiedDate, cinema: "Cinema City Katowice Punkt 44", movies: movies };
 }
