@@ -5,6 +5,7 @@ import axios from "axios";
 import dayjs from 'dayjs';
 
 export default async function run(date: string) {
+  const unifiedDate: string = dayjs(date).format("YYYY-MM-DD");
   const urlDay = howManyDaysFromToday(date);
   if (urlDay < 0 || urlDay > 7) {
     // Return unified object with empty array to prevent axios errors
@@ -28,7 +29,7 @@ export default async function run(date: string) {
         movies.push({ title: entry[0], time: entry[1] });
       }
       // Return unified object
-      return { date: dayjs(date).format("YYYY-MM-DD"), cinema: "Kino Helios Żory", movies: movies };
+      return { date: unifiedDate, cinema: "Kino Helios Żory", movies: movies };
     }
   }
 }

@@ -4,7 +4,8 @@ import axios from "axios";
 import dayjs from 'dayjs';
 
 export default async function run(date: string) {
-  const result = await axios.get(`http://kino.zory.pl/wydarzenia-${dayjs(date).format("YYYY-MM-DD")}.html`);
+  const unifiedDate: string = dayjs(date).format("YYYY-MM-DD");
+  const result = await axios.get(`http://kino.zory.pl/wydarzenia-${unifiedDate}.html`);
   const $ = load(result.data);
   // Parse the titles according to the page structure
   const titles = without(chunk(split($("td.title").text(), "\n").map(title => trim(title)), 3).map(title => title[1]), undefined);
@@ -18,5 +19,5 @@ export default async function run(date: string) {
     movies.push({ title: entry[0], time: entry[1] });
   }
   // Return unified object
-  return { date: dayjs(date).format("YYYY-MM-DD"), cinema: "Kino na Starówce Żory", movies: movies };
+  return { date: unifiedDate, cinema: "Kino na Starówce Żory", movies: movies };
 }
