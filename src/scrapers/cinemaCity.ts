@@ -39,5 +39,5 @@ export default async function run(date: string) {
   for (const entry of zipped) {
     movies.push({ title: entry[0], time: entry[1] });
   }
-  return { date: unifiedDate, cinema: "Cinema City Katowice Punkt 44", movies: movies };
+  return { date: unifiedDate, city: "Katowice", type: "Cinema City", cinema: "Cinema City Katowice Punkt 44", movies: movies };
 }

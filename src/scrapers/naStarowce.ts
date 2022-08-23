@@ -19,5 +19,5 @@ export default async function run(date: string) {
     movies.push({ title: entry[0], time: entry[1] });
   }
   // Return unified object
-  return { date: unifiedDate, cinema: "Kino na Starówce Żory", movies: movies };
+  return { date: unifiedDate, city: "Żory", type: "Na Starówce", cinema: "Kino na Starówce Żory", movies: movies };
 }
