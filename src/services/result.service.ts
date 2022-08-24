@@ -1,5 +1,6 @@
 import { DocumentDefinition, FilterQuery } from "mongoose";
-import Result, { ResultDocument } from "../models/result.model";
+import Result from "../models/result.model";
+import { ResultDocument } from "../common/types";
 
 export function createResult(input: DocumentDefinition<ResultDocument>) {
   return Result.create(input);

@@ -11,13 +11,7 @@ const app = express();
 
 // These routes exist only for development purposes
 app.get("/", async (req: Request, res: Response) => {
-  const result1 = await naStarowce("2022-08-25");
-  const result2 = await helios("2022-08-25");
-  const result3 = await multikino("2022-08-25");
-  const result4 = await cinemaCity("2022-08-25");
-
-
-  res.json([result1, result2, result3, result4]);
+  res.json({ message: "Welcome" });
 });
 
 app.get('/starowka', async (req: Request, res: Response) => {

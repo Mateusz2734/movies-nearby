@@ -1,6 +1,6 @@
-import { geocodingResponse } from "../services/geocoding.service";
+import { geocodingResponse } from "../common/types";
 
-export default function calculateDistance(chosenCity: geocodingResponse, lat2: number, lon2: number): number {
+export default function calculateDistance(chosenCity: geocodingResponse, lon2: number, lat2: number): number {
   const { lat: lat1, lon: lon1 } = chosenCity;
   const dividedPi: number = 0.017453292519943295;    // Math.PI / 180
   const cos = Math.cos;

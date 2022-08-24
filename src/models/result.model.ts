@@ -1,12 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-
-export interface ResultDocument extends Document {
-  date: string,
-  type: string,
-  city: string,
-  cinema: string,
-  movies: object,
-}
+import { ResultDocument } from "../common/types";
 
 const resultSchema = new Schema<ResultDocument>({
   date: { type: String, required: true },

@@ -1,11 +1,6 @@
 import axios from 'axios';
 import config from '../config/default';
-
-export interface geocodingResponse {
-  city: string,
-  lon: number,
-  lat: number;
-}
+import { geocodingResponse } from '../common/types';
 
 export default async function encodeCity(city: string): Promise<geocodingResponse> {
   // Encode the city name to put in API Request
