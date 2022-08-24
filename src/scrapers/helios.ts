@@ -11,7 +11,7 @@ export default async function run(date: string) {
     // Return unified object with empty array to prevent axios errors
     return { date: dayjs(date).format("YYYY-MM-DD"), cinema: "Kino Helios Żory", movies: [] };
   } else {
-    const result = await axios.get(`https://www.helios.pl/64,Zory/Repertuar/index/dzien/${urlDay}`);
+    const result = await axios.get(`https://www.helios.pl/64/Repertuar/index/dzien/${urlDay}`);
     const $ = load(result.data);
     // Parse the titles according to the page structure
     const titles = slice(split($(".movie-link").text(), "\n").map(info => trim(info)), 1);

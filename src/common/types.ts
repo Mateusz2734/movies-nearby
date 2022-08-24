@@ -4,7 +4,7 @@ export interface CinemaObject {
   cinema: string,
   lon: number,
   lat: number,
-  additionalInfo?: [string, number];
+  additionalInfo?: string | number;
 }
 
 export interface geocodingResponse {
