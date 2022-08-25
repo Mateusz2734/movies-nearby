@@ -1,6 +1,6 @@
-import { CinemaObject, geocodingResponse } from "../common/types";
+import { CinemaObject, GeocodingResponse } from "../common/types";
 
-export default function calculateDistance(chosenCity: geocodingResponse, cinema: CinemaObject): number {
+export default function calculateDistance(chosenCity: GeocodingResponse, cinema: CinemaObject): number {
   const { lat: lat1, lon: lon1 } = chosenCity;
   const { lat: lat2, lon: lon2 } = cinema;
   const dividedPi: number = 0.017453292519943295;    // Math.PI / 180

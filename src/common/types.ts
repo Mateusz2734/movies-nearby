@@ -7,16 +7,21 @@ export interface CinemaObject {
   additionalInfo?: string | number;
 }
 
-export interface geocodingResponse {
+export interface GeocodingResponse {
   city: string,
   lon: number,
   lat: number;
 }
 
-export interface ResultDocument extends Document {
+export interface ResultObject {
   date: string,
-  type: string,
   city: string,
+  type: string,
   cinema: string,
-  movies: object,
+  movies: MovieObject[];
+}
+
+export interface MovieObject {
+  title: string,
+  time: string[];
 }
