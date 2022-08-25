@@ -1,17 +1,20 @@
 import { split, trim, zip, slice } from "lodash";
 import { load } from "cheerio";
-import { howManyDaysFromToday } from "../utils/dates.util";
 import axios from "axios";
 import dayjs from 'dayjs';
+import { howManyDaysFromToday } from "../utils/dates.util";
+import { CinemaObject } from "../common/types";
 
-export default async function run(date: string) {
+export default async function run(date: string, cinema: CinemaObject) {
+  const { additionalInfo: cinemaId } = cinema;
   const unifiedDate: string = dayjs(date).format("YYYY-MM-DD");
   const urlDay = howManyDaysFromToday(date);
+
   if (urlDay < 0 || urlDay > 7) {
     // Return unified object with empty array to prevent axios errors
     return { date: dayjs(date).format("YYYY-MM-DD"), cinema: "Kino Helios Żory", movies: [] };
   } else {
-    const result = await axios.get(`https://www.helios.pl/64/Repertuar/index/dzien/${urlDay}`);
+    const result = await axios.get(`https://www.helios.pl/${cinemaId}/Repertuar/index/dzien/${urlDay}`);
     const $ = load(result.data);
     // Parse the titles according to the page structure
     const titles = slice(split($(".movie-link").text(), "\n").map(info => trim(info)), 1);

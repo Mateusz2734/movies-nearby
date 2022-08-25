@@ -20,17 +20,38 @@ app.get('/starowka', async (req: Request, res: Response) => {
 });
 
 app.get('/helios', async (req: Request, res: Response) => {
-  const result = await helios("2022-08-25");
+  const result = await helios("2022-08-25", {
+    city: "Żory",
+    type: "Helios",
+    cinema: "Helios Żory",
+    lon: 18.703087153668747,
+    lat: 50.04526975763794,
+    additionalInfo: 64,
+  });
   res.json(result);
 });
 
 app.get("/multikino", async (req: Request, res: Response) => {
-  const result = await multikino("2022-08-25");
+  const result = await multikino("2022-08-25", {
+    city: "Rybnik",
+    type: "Multikino",
+    cinema: "Multikino Rybnik",
+    lon: 18.543207710305587,
+    lat: 50.09437565527905,
+    additionalInfo: "rybnik",
+  });
   res.json(result);
 });
 
 app.get("/cinema-city", async (req: Request, res: Response) => {
-  const result = await cinemaCity("2022-08-25");
+  const result = await cinemaCity("2022-08-25", {
+    city: "Katowice",
+    type: "Cinema City",
+    cinema: "Cinema City Katowice Silesia",
+    lon: 19.00215585120842,
+    lat: 50.27064515361989,
+    additionalInfo: 1079,
+  });
   res.json(result);
 });
 

@@ -2,8 +2,10 @@ import { zip, trim } from "lodash";
 import { load } from "cheerio";
 import dayjs from 'dayjs';
 import puppeteer from "puppeteer";
+import { CinemaObject } from "../common/types";
 
-export default async function run(date: string) {
+export default async function run(date: string, cinema: CinemaObject) {
+  const { additionalInfo: cinemaId } = cinema;
   const unifiedDate: string = dayjs(date).format("YYYY-MM-DD");
   const browser = await puppeteer.launch({
     headless: true,
@@ -13,7 +15,7 @@ export default async function run(date: string) {
     }
   });
   const page: puppeteer.Page = await browser.newPage();
-  await page.goto(`https://www.cinema-city.pl/kina/punkt44/1065#/buy-tickets-by-cinema?in-cinema=1065&at=${unifiedDate}&view-mode=list`);
+  await page.goto(`https://www.cinema-city.pl/kina/punkt44/1065#/buy-tickets-by-cinema?in-cinema=${cinemaId}&at=${unifiedDate}&view-mode=list`);
   await page.waitForNetworkIdle();
   const html: string = await page.evaluate((): string => {
     return document.documentElement.innerHTML;
