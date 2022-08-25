@@ -8,7 +8,6 @@ export default async function run(date: string, cinema: CinemaObject) {
   const { additionalInfo: cinemaId } = cinema;
   const unifiedDate: string = dayjs(date).format("YYYY-MM-DD");
   const browser = await puppeteer.launch({
-    headless: true,
     defaultViewport: {
       width: 800,
       height: 1000
@@ -41,5 +40,5 @@ export default async function run(date: string, cinema: CinemaObject) {
   for (const entry of zipped) {
     movies.push({ title: entry[0], time: entry[1] });
   }
-  return { date: unifiedDate, city: "Katowice", type: "Cinema City", cinema: "Cinema City Katowice Punkt 44", movies: movies };
+  return { date: unifiedDate, city: cinema.city, type: cinema.type, cinema: cinema.cinema, movies: movies };
 }
