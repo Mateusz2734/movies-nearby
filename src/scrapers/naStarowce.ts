@@ -2,6 +2,7 @@ import { split, trim, without, chunk, zip } from "lodash";
 import { load } from "cheerio";
 import axios from "axios";
 import dayjs from 'dayjs';
+import { MovieObject } from "../common/types";
 
 export default async function run(date: string) {
   const unifiedDate: string = dayjs(date).format("YYYY-MM-DD");
@@ -14,9 +15,9 @@ export default async function run(date: string) {
   // Combine info and title arrays
   const zipped = zip(titles, infos);
   // New array for proper output format
-  const movies: Object[] = [];
+  const movies: MovieObject[] = [];
   for (const entry of zipped) {
-    movies.push({ title: entry[0], time: entry[1] });
+    movies.push({ title: entry[0] as string, time: entry[1] as string[] });
   }
   // Return unified object
   return { date: unifiedDate, city: "Żory", type: "Na Starówce", cinema: "Kino na Starówce Żory", movies: movies };

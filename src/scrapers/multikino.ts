@@ -2,7 +2,7 @@ import puppeteer, { Browser } from "puppeteer";
 import { zip, trim } from "lodash";
 import { load } from "cheerio";
 import dayjs from 'dayjs';
-import { CinemaObject } from "../common/types";
+import { CinemaObject, MovieObject } from "../common/types";
 
 export default async function run(date: string, cinema: CinemaObject) {
   const { additionalInfo: cinemaName } = cinema;
@@ -40,9 +40,9 @@ export default async function run(date: string, cinema: CinemaObject) {
     times.push(oneMovieTimes);
   });
   const zipped = zip(titles, times);
-  const movies: Object[] = [];
+  const movies: MovieObject[] = [];
   for (const entry of zipped) {
-    movies.push({ title: entry[0], time: entry[1] });
+    movies.push({ title: entry[0] as string, time: entry[1] as string[] });
   }
   return { date: unifiedDate, city: cinema.city, type: cinema.type, cinema: cinema.cinema, movies: movies };
 }

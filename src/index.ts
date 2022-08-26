@@ -63,7 +63,7 @@ const cinemas = [
 ];
 
 async function run() {
-  const results = await searchResults("2022-08-26", cinemas);
+  const results = await searchResults("2022-08-27", cinemas);
 }
 
 app.listen(PORT, () => {

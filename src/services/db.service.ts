@@ -2,7 +2,7 @@ import { DocumentDefinition, FilterQuery } from "mongoose";
 import Result from "../models/result.model";
 import { ResultObject } from "../common/types";
 
-export function createResult(input: DocumentDefinition<ResultObject>) {
+export function createResult(input: ResultObject) {
   return Result.create(input);
 }
 
