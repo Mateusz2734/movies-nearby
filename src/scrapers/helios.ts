@@ -17,7 +17,7 @@ export default async function run(date: string, cinema: CinemaObject) {
     const result = await axios.get(`https://www.helios.pl/${cinemaId}/Repertuar/index/dzien/${urlDay}`);
     const $: cheerio.Root = load(result.data);
     // Parse the titles according to the page structure
-    const titles: string[] = slice(split($(".movie-link").text(), "\n").map(info => trim(info)), 1);
+    const titles: string[] = slice(split($(".movie-link").text(), "\n").map(info => trim(info)), 1).map(info => trim(split(info, "/")[0]));
     // Parse the times according to the page structure
     const infos = split($("div.time").text(), "\n").map(info => info.replace(/\t/g, '')).map(info => info.replace(/\*/g, '').match(/.{1,5}/g)).slice(-titles.length);
     if (infos.includes(null)) {

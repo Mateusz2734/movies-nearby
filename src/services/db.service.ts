@@ -9,3 +9,7 @@ export function createResult(input: ResultObject) {
 export function findResultWithSpecificDateAndCinema(input: FilterQuery<ResultObject>) {
   return Result.findOne(input, {}, { lean: true });
 }
+
+export function deleteResultWithSpecificDate(input: FilterQuery<ResultObject>) {
+  return Result.deleteMany(input);
+}
