@@ -14,14 +14,14 @@ export async function backgroundScraping() {
           const savedResult = await createResult({ ...result });
           console.log(`Saved ${savedResult.cinema} @ ${date}`);
         } else {
-          console.log("Exists, skipping...");
         }
       } catch (error) {
         console.log(error);
       }
     }
   }
+  console.log("Results are up to date");
 }
 
-connectWithDatabase();
+connectWithDatabase("Background");
 backgroundScraping();

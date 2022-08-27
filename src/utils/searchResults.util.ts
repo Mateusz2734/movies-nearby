@@ -2,6 +2,7 @@ import { CinemaObject, ResultObject } from "../common/types";
 import { createResult, findResultWithSpecificDateAndCinema } from "../services/db.service";
 import { chooseScraperAndExecute } from "../controllers/scrapers.controller";
 import { Document } from "mongoose";
+import { omit } from "lodash";
 
 const cinemas: Object[] = [
   { city: 'Żory', type: 'Na Starówce', cinema: 'Kino na Starówce Żory', lon: 18.695609005931395, lat: 50.04499124407674 },
@@ -23,9 +24,9 @@ export default async function searchResults(date: string, cinemas: CinemaObject[
     if (!foundResult) {
       const newResult = await chooseScraperAndExecute(date, cinema);
       const newResultDocument = await createResult({ ...newResult });
-      results.push(newResultDocument);
+      results.push(omit(newResultDocument, ["_id", "type", "__v"]));
     } else {
-      results.push(foundResult);
+      results.push(omit(foundResult, ["_id", "type", "__v"]));
     }
   }
   return results;

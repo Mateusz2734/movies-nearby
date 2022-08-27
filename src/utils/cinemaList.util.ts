@@ -768,7 +768,7 @@ const cinemaList: CinemaObject[] = [
     cinema: "Multikino Kraków",
     lon: 19.984260621399013,
     lat: 50.08874558302253,
-    additionalInfo: "kraków",
+    additionalInfo: "krakow",
   },
   {
     city: "Lublin",
