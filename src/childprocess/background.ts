@@ -1,4 +1,4 @@
-import cinemaList from "../utils/cinemaList.util";
+import cinemaList from "../db/cinemaList.db";
 import { chooseScraperAndExecute } from "../controllers/scrapers.controller";
 import { createResult, findResultWithSpecificDateAndCinema } from "../services/db.service";
 import { connectWithDatabase } from "../db/connect";
@@ -20,7 +20,7 @@ export async function backgroundScraping() {
       }
     }
   }
-  console.log("Results are up to date");
+  console.log(`[${new Date().toISOString()}] Results are up to date`);
 }
 
 connectWithDatabase("Background");

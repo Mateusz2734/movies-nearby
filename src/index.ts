@@ -24,7 +24,7 @@ app.get('/starowka', async (req: Request, res: Response) => {
 });
 
 app.get('/helios', async (req: Request, res: Response) => {
-  const result = await helios("2022-08-27", {
+  const result = await helios("2022-08-28", {
     city: "Żory",
     type: "Helios",
     cinema: "Helios Żory",
@@ -63,6 +63,6 @@ app.get("/main", mainFlowHandler);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
-  connectWithDatabase("Main");
   startBackgroundScraping();
+  connectWithDatabase("Main");
 });

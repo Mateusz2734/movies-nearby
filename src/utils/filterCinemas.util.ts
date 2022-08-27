@@ -1,5 +1,5 @@
 import { CinemaObject, GeocodingResponse } from "../common/types";
-import cinemaList from "./cinemaList.util";
+import cinemaList from "../db/cinemaList.db";
 import calculateDistance from "./distance.util";
 
 export default function filterCinemas(radius: number, chosenCity: GeocodingResponse): Array<CinemaObject> {
