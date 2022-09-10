@@ -7,5 +7,5 @@ export default {
   cinemaCity: cinemaCity,
   helios: helios,
   multikino: multikino,
-  naStarowce: naStarowce
+  naStarowce: naStarowce,
 };

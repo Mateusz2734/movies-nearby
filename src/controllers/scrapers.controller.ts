@@ -1,7 +1,10 @@
 import { CinemaObject } from "../common/types";
 import scrapers from "../scrapers/default";
 
-export async function chooseScraperAndExecute(date: string, input: CinemaObject) {
+export async function chooseScraperAndExecute(
+  date: string,
+  input: CinemaObject
+) {
   if (input.type === "Helios") {
     const result = await scrapers.helios(date, input);
     return result;

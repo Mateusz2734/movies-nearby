@@ -6,7 +6,9 @@ export function createResult(input: ResultObject) {
   return Result.create(input);
 }
 
-export function findResultWithSpecificDateAndCinema(input: FilterQuery<ResultObject>) {
+export function findResultWithSpecificDateAndCinema(
+  input: FilterQuery<ResultObject>
+) {
   return Result.findOne(input, {}, { lean: true });
 }
 

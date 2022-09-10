@@ -1,11 +1,11 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
 import { startBackgroundScraping } from "./services/background.service";
 import { connectWithDatabase } from "./db/connect";
 import cinemaCity from "./scrapers/cinemaCity";
 import naStarowce from "./scrapers/naStarowce";
 import multikino from "./scrapers/multikino";
 import helios from "./scrapers/helios";
-import mainFlowHandler from './controllers/mainFlow.controller';
+import mainFlowHandler from "./controllers/mainFlow.controller";
 
 const PORT = 4000;
 
@@ -18,12 +18,12 @@ app.get("/", async (req: Request, res: Response) => {
   res.json({ message: "Welcome" });
 });
 
-app.get('/starowka', async (req: Request, res: Response) => {
+app.get("/starowka", async (req: Request, res: Response) => {
   const result = await naStarowce("2022-08-27");
   res.json(result);
 });
 
-app.get('/helios', async (req: Request, res: Response) => {
+app.get("/helios", async (req: Request, res: Response) => {
   const result = await helios("2022-08-28", {
     city: "Żory",
     type: "Helios",
