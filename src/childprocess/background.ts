@@ -5,10 +5,10 @@ import {
   findResultWithSpecificDateAndCinema,
 } from "../services/db.service";
 import { connectWithDatabase } from "../db/connect";
-import { todayAndFiveNextDays } from "../utils/dates.util";
+import { calculateDates } from "../utils/dates.util";
 
 export async function backgroundScraping() {
-  const dates: string[] = todayAndFiveNextDays();
+  const dates: string[] = calculateDates();
   for (const date of dates) {
     for (const cinema of cinemaList) {
       try {

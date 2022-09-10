@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 export function howManyDaysFromToday(day: string | Date): number {
   // Works good in GMT+2 timezone
@@ -18,16 +18,34 @@ export function xthDay(x: number): string {
   return dayjs(tomorrow.setDate(tomorrow.getDate() + x)).format("YYYY-MM-DD");
 }
 
-export function todayAndFiveNextDays(): string[] {
-  const date: string = dayjs(new Date()).format("YYYY-MM-DD");
-  return [xthDay(0), xthDay(1), xthDay(2), xthDay(3), xthDay(4), xthDay(5)];
-}
-
 export function todayAndXNextDays(x: number): string[] {
-  const date: string = dayjs(new Date()).format("YYYY-MM-DD");
   const dates: string[] = [];
   for (let i: number = 0; i <= x; i++) {
     dates.push(xthDay(i));
   }
   return dates;
+}
+
+export function calculateDates(): string[] {
+  const today: Dayjs = dayjs(new Date());
+
+  switch (today.day()) {
+    case 0:
+      return todayAndXNextDays(4);
+    case 1:
+      return todayAndXNextDays(3);
+    case 2:
+      return todayAndXNextDays(2);
+    case 3:
+      return todayAndXNextDays(8);
+    case 4:
+      return todayAndXNextDays(7);
+    case 5:
+      return todayAndXNextDays(6);
+    case 6:
+      return todayAndXNextDays(5);
+    default:
+      // will not ever run
+      return [""];
+  }
 }
