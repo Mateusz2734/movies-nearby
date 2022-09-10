@@ -22,3 +22,12 @@ export function todayAndFiveNextDays(): string[] {
   const date: string = dayjs(new Date()).format("YYYY-MM-DD");
   return [xthDay(0), xthDay(1), xthDay(2), xthDay(3), xthDay(4), xthDay(5)];
 }
+
+export function todayAndXNextDays(x: number): string[] {
+  const date: string = dayjs(new Date()).format("YYYY-MM-DD");
+  const dates: string[] = [];
+  for (let i: number = 0; i <= x; i++) {
+    dates.push(xthDay(i));
+  }
+  return dates;
+}
