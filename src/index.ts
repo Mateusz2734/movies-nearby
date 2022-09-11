@@ -9,12 +9,14 @@ import mainFlowHandler from "./controllers/mainFlow.controller";
 import cityFlowHandler from "./controllers/cityFlow.controller";
 import { runScrapingScheduler } from "./controllers/schedule.controller";
 import { log } from "./log/logger";
+import cors from "cors";
 
 const PORT = 4000;
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // These routes exist only for development purposes
 app.get("/", async (req: Request, res: Response) => {
