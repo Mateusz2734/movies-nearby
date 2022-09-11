@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CinemaObject, GeocodingResponse } from "../common/types";
 import encodeCity from "../services/geocoding.service";
-import filterCinemasByDistance from "../utils/filterCinemas.util";
+import { filterCinemasByDistance } from "../utils/filterCinemas.util";
 import searchResults from "../utils/searchResults.util";
 
 export default async function mainFlowHandler(

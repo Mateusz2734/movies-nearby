@@ -6,6 +6,7 @@ import naStarowce from "./scrapers/naStarowce";
 import multikino from "./scrapers/multikino";
 import helios from "./scrapers/helios";
 import mainFlowHandler from "./controllers/mainFlow.controller";
+import cityFlowHandler from "./controllers/cityFlow.controller";
 import { runScrapingScheduler } from "./controllers/schedule.controller";
 import { log } from "./log/logger";
 
@@ -62,6 +63,8 @@ app.get("/cinema-city", async (req: Request, res: Response) => {
 });
 
 app.get("/main", mainFlowHandler);
+
+app.get("/city", cityFlowHandler);
 
 app.listen(PORT, () => {
   log.info(`Server started on port ${PORT}.`);
