@@ -1,16 +1,16 @@
-import cinemaList from "../db/cinemaList.db";
 import { chooseScraperAndExecute } from "../controllers/scrapers.controller";
 import {
   createResult,
   findResultWithSpecificDateAndCinema,
 } from "../services/db.service";
-import { connectWithDatabase } from "../db/connect";
 import { calculateDates } from "../utils/dates.util";
+import { connectWithDatabase } from "../db/connect";
+import { CinemaObject } from "../common/types";
 
-export async function backgroundScraping() {
+export async function backgroundScraping(slicedCinemaList: CinemaObject[]) {
   const dates: string[] = calculateDates();
   for (const date of dates) {
-    for (const cinema of cinemaList) {
+    for (const cinema of slicedCinemaList) {
       try {
         const foundResult = await findResultWithSpecificDateAndCinema({
           date: date,
@@ -27,8 +27,19 @@ export async function backgroundScraping() {
       }
     }
   }
-  console.log(`[${new Date().toISOString()}] Results are up to date`);
+  process.disconnect();
 }
 
-connectWithDatabase("Background");
-backgroundScraping();
+function startSpecificScraper() {
+  const processName: string = process.argv[2];
+
+  process.on("message", async (list: CinemaObject[]) => {
+    connectWithDatabase(`Background process ${processName}`);
+    await backgroundScraping(list);
+    console.log(
+      `[${new Date().toISOString()}] Background process ${processName} is up to date`
+    );
+  });
+}
+
+startSpecificScraper();
