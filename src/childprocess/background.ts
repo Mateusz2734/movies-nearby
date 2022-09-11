@@ -37,9 +37,6 @@ function startSpecificScraper() {
   process.on("message", async (list: CinemaObject[]) => {
     connectWithDatabase(`Background process ${processName}`);
     await backgroundScraping(list);
-    log.info(
-      `[${new Date().toISOString()}] Background process ${processName} is up to date`
-    );
   });
 }
 
