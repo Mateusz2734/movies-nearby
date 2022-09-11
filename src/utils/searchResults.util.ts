@@ -1,7 +1,7 @@
 import { CinemaObject, ResultObject } from "../common/types";
 import {
   createResult,
-  findResultWithSpecificDateAndCinema,
+  findResultWithSpecificCriteria,
 } from "../services/db.service";
 import { chooseScraperAndExecute } from "../controllers/scrapers.controller";
 import { Document } from "mongoose";
@@ -13,7 +13,7 @@ export default async function searchResults(
 ) {
   async function searchLogic(specificCinema: CinemaObject) {
     const { cinema } = specificCinema;
-    const cinemaDocument = await findResultWithSpecificDateAndCinema({
+    const cinemaDocument = await findResultWithSpecificCriteria({
       date: date,
       cinema: cinema,
     });

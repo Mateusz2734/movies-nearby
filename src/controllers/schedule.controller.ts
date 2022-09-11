@@ -1,4 +1,4 @@
-import { scheduleJob, RecurrenceRule, Job } from "node-schedule";
+import { scheduleJob, RecurrenceRule } from "node-schedule";
 import { startBackgroundScraping } from "../services/background.service";
 
 const scrapingRule = new RecurrenceRule();

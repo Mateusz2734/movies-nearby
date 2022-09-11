@@ -1,7 +1,7 @@
 import { chooseScraperAndExecute } from "../controllers/scrapers.controller";
 import {
   createResult,
-  findResultWithSpecificDateAndCinema,
+  findResultWithSpecificCriteria,
 } from "../services/db.service";
 import { calculateDates } from "../utils/dates.util";
 import { connectWithDatabase } from "../db/connect";
@@ -13,7 +13,7 @@ export async function backgroundScraping(slicedCinemaList: CinemaObject[]) {
   for (const date of dates) {
     for (const cinema of slicedCinemaList) {
       try {
-        const foundResult = await findResultWithSpecificDateAndCinema({
+        const foundResult = await findResultWithSpecificCriteria({
           date: date,
           ...cinema,
         });
