@@ -6,6 +6,7 @@ import naStarowce from "./scrapers/naStarowce";
 import multikino from "./scrapers/multikino";
 import helios from "./scrapers/helios";
 import mainFlowHandler from "./controllers/mainFlow.controller";
+import { runScrapingScheduler } from "./controllers/schedule.controller";
 
 const PORT = 4000;
 
@@ -65,4 +66,5 @@ app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
   startBackgroundScraping();
   connectWithDatabase("Main process");
+  runScrapingScheduler();
 });

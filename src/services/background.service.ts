@@ -13,10 +13,7 @@ export function startBackgroundScraping() {
   );
 }
 
-export function forkBackgroundProcess(
-  list: CinemaObject[],
-  name: number
-): void {
+const forkBackgroundProcess = (list: CinemaObject[], name: number): void => {
   const back: ChildProcess = fork(`./src/childprocess/background.ts`, [
     `${name}`,
   ]);
@@ -25,4 +22,4 @@ export function forkBackgroundProcess(
     console.log(`Child process ${name} disconnected.`);
     back.kill();
   });
-}
+};
