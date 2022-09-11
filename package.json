@@ -25,6 +25,7 @@
     "mongoose": "^6.5.2",
     "node-schedule": "^2.1.0",
     "pino": "^8.5.0",
+    "pino-pretty": "^9.1.0",
     "puppeteer": "^16.2.0"
   },
   "devDependencies": {

@@ -6,6 +6,7 @@ import {
 import { calculateDates } from "../utils/dates.util";
 import { connectWithDatabase } from "../db/connect";
 import { CinemaObject } from "../common/types";
+import { log } from "../log/logger";
 
 export async function backgroundScraping(slicedCinemaList: CinemaObject[]) {
   const dates: string[] = calculateDates();
@@ -19,11 +20,11 @@ export async function backgroundScraping(slicedCinemaList: CinemaObject[]) {
         if (!foundResult) {
           const result = await chooseScraperAndExecute(date, cinema);
           const savedResult = await createResult({ ...result });
-          console.log(`Saved ${savedResult.cinema} @ ${date}`);
+          log.trace(`Saved ${savedResult.cinema} @ ${date}`);
         } else {
         }
       } catch (error) {
-        console.log(error);
+        log.error(error);
       }
     }
   }
@@ -36,7 +37,7 @@ function startSpecificScraper() {
   process.on("message", async (list: CinemaObject[]) => {
     connectWithDatabase(`Background process ${processName}`);
     await backgroundScraping(list);
-    console.log(
+    log.info(
       `[${new Date().toISOString()}] Background process ${processName} is up to date`
     );
   });

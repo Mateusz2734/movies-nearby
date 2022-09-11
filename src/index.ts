@@ -7,6 +7,7 @@ import multikino from "./scrapers/multikino";
 import helios from "./scrapers/helios";
 import mainFlowHandler from "./controllers/mainFlow.controller";
 import { runScrapingScheduler } from "./controllers/schedule.controller";
+import { log } from "./log/logger";
 
 const PORT = 4000;
 
@@ -63,7 +64,7 @@ app.get("/cinema-city", async (req: Request, res: Response) => {
 app.get("/main", mainFlowHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}.`);
+  log.info(`Server started on port ${PORT}.`);
   startBackgroundScraping();
   connectWithDatabase("Main process");
   runScrapingScheduler();

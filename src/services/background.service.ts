@@ -3,6 +3,7 @@ import { Chance } from "chance";
 import { chunk } from "lodash";
 import { CinemaObject } from "../common/types";
 import cinemaList from "../db/cinemaList.db";
+import { log } from "../log/logger";
 
 export function startBackgroundScraping() {
   var seed = new Chance(12345);
@@ -19,7 +20,7 @@ const forkBackgroundProcess = (list: CinemaObject[], name: number): void => {
   ]);
   back.send(list);
   back.on("disconnect", (): void => {
-    console.log(`Child process ${name} disconnected.`);
+    log.info(`Child process ${name} disconnected.`);
     back.kill();
   });
 };
