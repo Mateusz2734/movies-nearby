@@ -64,5 +64,5 @@ app.get("/main", mainFlowHandler);
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
   startBackgroundScraping();
-  connectWithDatabase("Main");
+  connectWithDatabase("Main process");
 });
