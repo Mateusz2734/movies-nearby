@@ -1,5 +1,5 @@
 import { connect } from "mongoose";
-import config from "../config/default";
+import config from "../config/default.config";
 
 export async function connectWithDatabase(name: string) {
   try {
