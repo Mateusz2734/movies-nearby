@@ -20,7 +20,10 @@ export async function backgroundScraping(slicedCinemaList: CinemaObject[]) {
         if (!foundResult) {
           const result = await chooseScraperAndExecute(date, cinema);
           const savedResult = await createResult({ ...result });
-          log.trace(`Saved ${savedResult.cinema} @ ${date}`);
+          const encodedCinema: string = savedResult.cinema
+            .normalize("NFKD")
+            .replace(/[^\w\s.-_\/]/g, "");
+          log.trace(`Saved ${encodedCinema} @ ${date}`);
         } else {
         }
       } catch (error) {
